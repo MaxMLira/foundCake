@@ -1,0 +1,158 @@
+
+@charset "utf-8";
+@import url("https://fonts.googleapis.com/css?family=Lobster");
+
+
+body{
+}
+
+header{
+    background-color: #efb5b2;
+    
+}
+header ul{
+    list-style: none;
+    text-transform: uppercase;
+    top:0px;
+    text-align: end;
+}
+header li{
+    display: inline-block;
+    padding: 30px;
+    transition:1s;
+}
+header a{
+    /*color:#6d2e01;*/
+    text-decoration: none;
+}
+header a:hover {
+    color:pink;
+}
+#tituloh1{
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    font-size: 90px;
+    /*color:#9d0a22;*/
+    color:aquamarine;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.6);
+    padding: 0px; 
+    margin-top: 0px;
+}
+#tituloh2{
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    font-size: 20px;
+    color: #6d2e01;
+    padding: 0px;
+}
+h1{
+    font-family: 'Lobster', cursive;
+    color: #6d2e01;
+}
+p{
+    font-family: 'Open Sans', sans-serif;
+    color: #6d2e01;
+
+}
+
+#form, #form2{
+    width: 500px;
+    margin: auto;
+    text-align: center;
+}
+#form3{
+    float: right;
+    
+    
+}
+input, textarea{
+    font-family: 'Open Sans', sans-serif;
+    font-weight: normal;
+    font-size: 12pt;
+    background-color:  #efb5b2;
+    border-radius: 10px;
+    text-align: center;
+}
+input:hover, textarea:hover{
+    background-color:pink;  
+}
+fieldset{
+    border-color: #cecece;
+    margin: 10px;
+}
+.cliente{
+    float: left;
+    clear: both;
+}
+
+
+#form-contato label{
+	font-weight: bold;
+	float: center;
+}
+#form-busca, .form-busca{
+    display: inline-block; 
+    margin-left: 150px;
+    tab-size: 500px;
+}
+#form-busca2{
+    display: inline-block; 
+    
+}
+
+
+/*Estilos para telas no maximo para 480px*/
+@media only screen and (max-width:480px){
+	
+	body{
+		width: 100%;
+		margin:0 auto;
+	}	
+	.col, .collast{
+		text-align: center;
+		width: 100%;
+		float:none;
+		margin-right: none;
+    }
+	
+}
+
+/*Estilos para telas no maximo para 481px e 960px*/
+@media only screen and (min-width:481px) and (max-width:960px){
+	
+	body{
+		width: 94%;
+		margin:0 auto;
+	}
+	.col{
+		text-align: center;
+		float:left;
+		width: 32%;
+		margin-right:1.5%; 
+	}
+	.collast{
+		text-align: center;
+		float:left;
+		width: 32%;
+	}
+	
+}
+/*Estilos para telas no maximo para 961px*/
+@media only screen and (min-width:961px){
+body{
+    width: 90.765%;
+    margin:0 auto;
+	max-width: 1300px;
+}
+.col{
+	text-align: center;
+	float:left;
+	width: 32%;
+	margin-right:1.5%; 
+}
+.collast{
+	text-align: center;
+	float:left;
+	width: 32%;
+}
+}
