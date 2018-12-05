@@ -4,28 +4,28 @@
 		
 
         <div id="form">
-              <strong>   <p>Preencha o formulário com seus dados que vamos entrar em contato para você ser nosso anunciantes!</p></strong> 
+              <strong>   <p>Preencha o formulário com seus dados que vamos entrar em contato para você ser um anunciante</p></strong> 
             <fieldset><legend><p> <u> Seja um anunciante!</u></p></legend> 
 
             <form action="envia.php" method="post" id="form-contato">
             <p>
-                <label for="nome">Nome:</label>
+                <label for="nome">Nome:</label> <br>
                 <input type="text" id="nome" nome="nome" required placeholder="Digite seu nome aqui"><span></span>
             </p>
             <p>
-                <label for="email">Email:</label>	
+                <label for="email">Email:</label>	<br>
                 <input type="email" required id="email" placeholder="Digite seu email aqui"><span></span>
             </p>
             <p>
-                <label for="telefone">Telefone:</label>	
+                <label for="telefone">Telefone:</label>	<br>
                 <input type="telefone" required id="telefone" placeholder="Digite seu Telefone aqui"><span></span>
             </p>
             <p>
-                <label for="msg">Mensagem:</label>
-                <textarea id="msg" name="msg" placeholder="mensagem"></textarea><span></span>
+                <label for="msg">Mensagem:</label> <br>
+                <textarea id="msg" rows="7"col="50" name="msg" placeholder="mensagem"></textarea><span></span>
             </p>
             <p>
-                <input type="submit" id="enviar" name="enviar" value="Enviar." >
+                <input type="submit" id="enviar" class="botao" name="enviar" value="Enviar" >
             </p>
                 
             </form>
@@ -46,7 +46,7 @@
             </p>
             
             <p>
-                <input type="submit" id="entrar" name="entrar" value="Entrar." >
+                <input type="submit" id="entrar" class="botao" name="entrar" value="Entrar" >
             </p>
                 
             </form>

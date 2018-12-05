@@ -40,13 +40,13 @@
 		<p>
 			<input type="submit" id="enviar" name="enviar" value="Enviar." >
 		</p>
-			
+
 		</form>
 		
 	</div>
 
 	<fieldset><legend><p>Localização:</p></legend> 
-
+	
 	<div id="mapa"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3658.170100442371!2d-46.54277174911736!3d-23.526383666112306!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5e45de223d91%3A0xc001e09aee26a54f!2sR.+Francisco+Coimbra%2C+406+-+Penha%2C+S%C3%A3o+Paulo+-+SP!5e0!3m2!1spt-BR!2sbr!4v1495426638337" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe></div>
 
 </section>
