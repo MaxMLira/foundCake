@@ -53,4 +53,39 @@ class Anuncio extends Database{
     public function setTermo($valorTermo){
         $this->termo = mysqli_real_escape_string($this->conexao,$valorTermo);    
     } 
+
+    public function insereAnuncio(){
+        $sql = "INSERT INTO anuncio (nome, texto, resumo,regiao,contato, imagem, usuario_id)";
+        $sql.= " VALUES('{$this->nome}', '{$this->texto}', '{$this->resumo}','{$this->regiao}','{$this->contato}', ";
+        $sql.= "'{$this->imagem}', {$this->usuarioId})";
+        
+        $resultado = mysqli_query($this->conexao, $sql) or die(mysqli_error($this->conexao));
+        return $resultado;
+    }
+
+    public function lerTodosAnuncios(){
+        $sql = "SELECT * FROM anuncio ORDER BY desc";
+        $resultado = mysqli_query($this->conexao, $sql) or die(mysqli_error($this->conexao));
+        return $resultado;
+    }
+
+    public function lerPorRegiao(){
+        $sql = "SELECT * FROM anuncio WHERE regiao = '{$this->regiao}'";
+        $resultado = mysqli_query($this->conexao, $sql) or die(mysqli_error($this->conexao));
+        return $resultado;
+    }
+
+    public function lerUmAnuncio(){
+        $sql = "SELECT * FROM anuncio WHERE id = '{$this->id}'";
+        $resultado = mysqli_query($this->conexao, $sql) or die(mysqli_error($this->conexao));
+        return $resultado;
+    }
+
+    public function busca(){
+        $sql = "SELECT * FROM anuncio WHERE titulo LIKE '%{$this->termo}%' OR texto LIKE '%{$this->termo}%'";
+        $sql .= " OR resumo LIKE '%{$this->termo}%' OR regiao LIKE '%{$this->termo}% OR contato LIKE'%{$this->termo}%'";
+        $resultado = mysqli_query($this->conexao, $sql) or die(mysqli_error($this->conexao));
+        return $resultado;
+    }
+
 }
