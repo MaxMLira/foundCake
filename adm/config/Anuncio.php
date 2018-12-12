@@ -38,10 +38,10 @@ class Anuncio extends Database{
         $this->resumo = mysqli_real_escape_string($this->conexao,$valorResumo);    
     }  
     public function setRegiao($valorRegiao){
-        $this->resumo = mysqli_real_escape_string($this->conexao,$valorRegiao);    
+        $this->regiao = mysqli_real_escape_string($this->conexao,$valorRegiao);    
     } 
     public function setContato($valorContato){
-        $this->resumo = mysqli_real_escape_string($this->conexao,$valorContato);    
+        $this->contato = mysqli_real_escape_string($this->conexao,$valorContato);    
     }   
     public function setImagem($valorImagem){
         $this->imagem = mysqli_real_escape_string($this->conexao,$valorImagem);    
@@ -62,12 +62,27 @@ class Anuncio extends Database{
         $resultado = mysqli_query($this->conexao, $sql) or die(mysqli_error($this->conexao));
         return $resultado;
     }
-
-    public function lerTodosAnuncios(){
-        $sql = "SELECT * FROM anuncio ORDER BY desc";
+    public function atualizarAnuncio(){
+        $sql = "UPDATE anuncio SET nome = '{$this->nome}' ";
+        $sql.= " , texto = '{$this->texto}', resumo = '{$this->resumo}',regiao = '{$this->regiao}',contato ='{$this->contato}', ";
+        $sql.= "imagem ='{$this->imagem}' WHERE id = {$this->id}";
+        
         $resultado = mysqli_query($this->conexao, $sql) or die(mysqli_error($this->conexao));
         return $resultado;
     }
+
+    public function lerTodosAnuncios(){
+        $sql = "SELECT * FROM anuncio";
+        $resultado = mysqli_query($this->conexao, $sql) or die(mysqli_error($this->conexao));
+        return $resultado;
+    }
+
+    public function lerPorUser(){
+        $sql = "SELECT * FROM anuncio WHERE usuario_id = '{$this->usuarioId}'";
+        $resultado = mysqli_query($this->conexao, $sql) or die(mysqli_error($this->conexao));
+        return $resultado;
+    }
+
 
     public function lerPorRegiao(){
         $sql = "SELECT * FROM anuncio WHERE regiao = '{$this->regiao}'";
@@ -87,5 +102,55 @@ class Anuncio extends Database{
         $resultado = mysqli_query($this->conexao, $sql) or die(mysqli_error($this->conexao));
         return $resultado;
     }
+
+
+    public function upload($dadosImagem) {
+        /* Se o nome da imagem (vindo do array FILES) for diferente de vazio... */
+        if($dadosImagem["name"] != ""){
+            /* Então faça: */
+            
+            // Configurações para o upload da imagem
+            $this->imagem = $dadosImagem["name"]; // pega o nome e a extensão da imagem
+            $nomeTemporario = $dadosImagem['tmp_name'];	// pega o nome temporário 
+            
+            // Obtendo SOMENTE a extensão
+            $tipoDeArquivo = strtolower( pathinfo($this->imagem, PATHINFO_EXTENSION) ); 
+            
+            // Definição do diretório/pasta de destino já com o caminho para o nome/extensão      
+            $pasta = "img/{$this->imagem}"; 
+        
+            // Avaliando se é uma extensão de imagem válida
+            switch($tipoDeArquivo){
+                // Caso seja qualquer uma dessas abaixo...
+                case 'jpg':
+                case 'jpeg':
+                case 'gif':
+                case 'png':
+                case 'svg':
+                    // ... então mova o arquivo do diretorio temp do servidor para o destino
+                    move_uploaded_file($nomeTemporario, $pasta); 
+                    
+                    // e retorne a operação como true (houve upload e deu tudo certo)
+                    return true;
+                break;
+
+                // Caso seja qualquer outra extensão...
+                default:
+                    // ...então atribua uma string vazia para a propriedade imagem
+                    $this->imagem = "";
+                    
+                    // e retorne false (não houve upload e vai gerar um erro)
+                    return false;
+                break;
+            }           
+        /* Senão... */
+        } else {
+            // ... atribua uma string vazia para a propriedade imagem
+            $this->imagem = "";
+            
+            // e retorne a operação como true (não houve upload, mas deu tudo certo!)
+            return true;
+        }
+    } // fim método upload
 
 }

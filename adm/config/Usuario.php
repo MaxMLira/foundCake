@@ -29,6 +29,22 @@ class Usuario extends Database{
         $this->tipo = mysqli_real_escape_string($this->conexao,$valorTipo);
     }
 
+
+    public function lerUsuarios(){
+        $sql = "SELECT * FROM usuarios ORDER BY tipo";
+        $resultado = mysqli_query($this->conexao, $sql) 
+            or die(mysqli_error($this->conexao));
+        return $resultado;
+    }
+
+    public function lerUmUsuario(){
+        $sql = "SELECT * FROM usuarios WHERE id = {$this->id}";
+        $resultado = mysqli_query($this->conexao, $sql) 
+            or die(mysqli_error($this->conexao));
+        return $resultado;
+    }
+
+
     public function inserirUsuario(){
         $sql = "INSERT INTO usuarios (nome, email, senha,tipo) ";
         $sql.= " VALUES('{$this->nome}','{$this->email}','{$this->senha}','{$this->tipo}')";
@@ -38,15 +54,15 @@ class Usuario extends Database{
         return $resultado;
     }
 
-    public function atualizaUsuario(){
-        $sql = "UPDATE usuarios SET nome = '{$this->nome}', email ='{$this->email}', senha = '{$this->senha}'";
+    public function atualizarUsuario(){
+        $sql = "UPDATE usuarios SET nome = '{$this->nome}', email ='{$this->email}', senha = '{$this->senha}',tipo ='{$this->tipo}'  ";
         $sql.= "WHERE id = '{$this->id}'";
         $resultado = mysqli_query($this->conexao, $sql) 
             or die(mysqli_error($this->conexao));
         return $resultado;
     }
 
-    public function excluiUsuario(){
+    public function excluirUsuario(){
         $sql = "DELETE FROM usuarios WHERE id = '{$this->id}'";
         $resultado = mysqli_query($this->conexao, $sql) 
             or die(mysqli_error($this->conexao));
@@ -55,7 +71,6 @@ class Usuario extends Database{
 
     public function buscaUsuario(){
         $sql = "SELECT * FROM usuarios WHERE email ='{$this->email}'";
-        $sql .= " AND senha = '{$this->senha}'";
         $resultado = mysqli_query($this->conexao, $sql) 
             or die(mysqli_error($this->conexao));
         return $resultado;
@@ -63,6 +78,20 @@ class Usuario extends Database{
 
     public function codificaSenha($valorSenha){
         return password_hash( $valorSenha, PASSWORD_DEFAULT );
+    }
+
+    public function confirmaSenha(){
+        $sql = "SELECT senha FROM `usuarios` WHERE email = '{$this->email}'";
+        $resultado = mysqli_query($this->conexao, $sql) 
+            or die(mysqli_error($this->conexao));
+       
+        $dados = mysqli_fetch_assoc($resultado);
+        $hash = $dados['senha'];
+        if(password_verify($this->senha, $hash)){
+          return true;
+       }else {
+          return false;
+        }
     }
 
     public function verificaSenha($senhaNoForm, $senhaNoBanco){

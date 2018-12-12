@@ -1,6 +1,7 @@
 <?php 
 class ControleDeAcesso {
     public function __construct(){
+        //iniciar uma seção php
         session_start();
     }
 
@@ -14,14 +15,14 @@ class ControleDeAcesso {
     public function logout(){
         session_start();
         session_destroy();
-        header("Location:../../anuncie.php?logout");
+        header("Location:../anuncie.php?logout");
         exit;
     }
 
     public function verificaPermissao(){
         if(!isset($_SESSION['id'])){
             session_destroy();
-            header("Location:../../anuncie.php?acesso_proibido");
+            header("Location:../anuncie.php?acesso_proibido");
             exit;
         }else{
             return true;

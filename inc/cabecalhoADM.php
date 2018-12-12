@@ -1,3 +1,12 @@
+<?php
+    require_once "config/ControleDeAcesso.php";
+    $controle = new ControleDeAcesso();
+    $controle->verificaPermissao();
+    if(isset($_GET['logout'])){
+        $controle->logout();
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,8 +15,8 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>Confeiteiros São Paulo</title>
 
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/main.css">
 
 
 
@@ -29,7 +38,8 @@
                        
                         <ul>
                             <li><a	href="index.php" title="pagina inicial">Home</a></li>|
-                            <li><a	href="anuncie.php" title="galeria">Anuncie Aqui</a></li>
+                            <li><a	href="anuncie.php" title="galeria">Anuncie Aqui</a></li>|
+                            <li><a	href="?logout" title="galeria">Sair</a></li>
                         </ul>        
                 </nav>
             </section>

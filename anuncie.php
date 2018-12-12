@@ -55,7 +55,7 @@ if(isset( $_GET['logout']) ){
             </p>
             <p>
                 <label for="senha">Senha:</label>
-                <input type="text" id="senha" name="senha" required placeholder="senha"><span></span>
+                <input type="password" id="senha" name="senha" required placeholder="senha"><span></span>
             </p>
             
             <p>
@@ -78,19 +78,22 @@ if(isset( $_GET['logout']) ){
                         $usuario = new Usuario();
 
                         $usuario->setEmail($_POST['email']);
-
-                        $usuario->setSenha( $usuario->codificaSenha($_POST['senha']) );
+                        $usuario->setSenha( $_POST['senha'] );
+                        $linhas = $usuario->confirmaSenha();
                         
+
+                        
+                        // echo $usuario->getSenha();
                         //Buscar no banco
                         $resultado = $usuario->buscaUsuario();
-                        //guarde a quantidade de linhas que a consulta retorna
-                        $linhas = mysqli_num_rows($resultado);
+                        // //guarde a quantidade de linhas que a consulta retorna
+                        // $linhas = mysqli_num_rows($resultado);
                         
-                        if($linhas == 1){
+                        if($linhas == true){
                             
                             //gerando um array com os dados do usuario
                             $dados = mysqli_fetch_assoc($resultado);
-
+                
                             require_once "adm/config/ControleDeAcesso.php";
                             //criando um objeto para o acesso
                             $controle =  new ControleDeAcesso();
@@ -98,7 +101,7 @@ if(isset( $_GET['logout']) ){
                             $controle->login($dados['id'],$dados['nome'],$dados['email'],$dados['tipo']);
 
                             //redirecionando para o painel
-                            header("Location:admin/index.php");
+                            header("Location:adm/index.php");
                         }else{
                             header("Location:anuncie.php?nao_encontrado");
                         }                        
@@ -113,9 +116,5 @@ if(isset( $_GET['logout']) ){
     </main>
 
 
+    <?php require "inc/rodape.php"; ?> 
 
-
-
-
-</body>
-</html>
